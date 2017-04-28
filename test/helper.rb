@@ -41,7 +41,18 @@ class ActionDispatch::IntegrationTest < ActiveSupport::TestCase
 
       with_routing do |set|
         set.draw do
-          get ':action', :controller => "#{controller_namespace}/test"
+          controller "#{controller_namespace}/test" do
+            [
+              :no_session_access,
+              :set_session_value,
+              :get_session_value,
+              :get_session_id,
+              :call_reset_session,
+              :renew,
+            ].each do |action|
+              get action
+            end
+          end
         end
 
         @app = self.class.build_app(set) do |middleware|
