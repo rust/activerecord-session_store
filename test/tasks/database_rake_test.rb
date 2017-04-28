@@ -4,7 +4,7 @@ require 'rake'
 module ActiveRecord
   module SessionStore
     class DatabaseRakeTest < ActiveSupport::TestCase
-      class AddTimestampsToSession < ActiveRecord::Migration
+      class AddTimestampsToSession < ActiveRecord::Migration[5.1]
         self.verbose = false
 
         def change
